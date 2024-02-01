@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>Lista de Tarefas</h1>
+
+  <h2>Você pode <span>criar</span> sua lista e <span>remover</span>
+    as tarefas concluídas com o programa <span>toDo</span>
+  </h2>
+  <div class="container-list-style">
+    <div class="container-show-list">
+      <ul class="show-list">
+        <li *ngFor="let todo of todolist">
+          <span class="finished" *ngIf="todo.done">OK</span>
+          {{ todo.task }}
+          <button class="done-button-style" *ngIf="!todo.done" (click)="markAsDone(todo)">Concluído</button>
+          <button class="remove-button-style" (click)="onRemove(todo)">Remover</button>
+        </li>
+      </ul>
+    </div>
+    <div class="container-form">
+      <form [formGroup]="form" class="form-style">
+        <input class="input-style" type="text" name="todo" formControlName="task" #input>
+        <span>{{ input.value.length }}/50</span>
+        <p class="error" *ngIf="form.get('task')?.invalid">{{ onValid("task") }}</p>
+      </form>
+      <button class="add-button-style" (click)="onAdd()" [disabled]="!form.valid">Adicionar</button>
+    </div>
+  </div>
+  <div class="footer">
+    <p>Apenas para estudo, TYPESCRIPT | JAVASCRIPT | VSCODE | SCSS | HTML</p>
+  </div>
+</div>
